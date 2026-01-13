@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SecurePro V23</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#020C17">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/564/564445.png">
+
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
@@ -24,7 +31,7 @@
     <div id="modal-settings" class="modal hidden">
         <div class="modal-content">
             <h2 style="margin-top:0">Paramètres</h2>
-            <div id="dark-toggle-action" class="switch-container">
+            <div id="dark-toggle-action" class="switch-container" style="cursor:pointer;">
                 <span>MODE SOMBRE</span>
                 <div class="toggle-track"></div>
             </div>
@@ -41,10 +48,10 @@
                 <button onclick="openMaster(0)">MASTER P1</button>
                 <button onclick="openMaster(1)">MASTER P2</button>
             </div>
-            <button id="exp-btn" style="width:100%; margin-bottom:10px; background:#444;">EXPORTER BACKUP</button>
-            <button id="imp-btn" style="width:100%; margin-bottom:15px; background:#444;">IMPORTER BACKUP</button>
+            <button id="exp-btn" style="width:100%; margin-bottom:10px; background:#444; color:white;">EXPORTER BACKUP</button>
+            <button id="imp-btn" style="width:100%; margin-bottom:15px; background:#444; color:white;">IMPORTER BACKUP</button>
             <input type="file" id="file-input" class="hidden">
-            <button style="width:100%; background:var(--danger); font-size:1.1rem" onclick="closeModals()">FERMER</button>
+            <button style="width:100%; background:var(--danger); font-size:1.1rem; color:white; padding:15px; border-radius:12px;" onclick="closeModals()">FERMER</button>
         </div>
     </div>
 
@@ -60,12 +67,12 @@
             </div>
             <div id="pop-master-ctrls" class="hidden">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0;">
-                    <button id="btn-overwrite" style="background:var(--danger)">ÉCRASER</button>
-                    <button id="btn-append" style="background:var(--safe)">AJOUTER</button>
+                    <button id="btn-overwrite" style="background:var(--danger); color:white;">ÉCRASER</button>
+                    <button id="btn-append" style="background:var(--safe); color:white;">AJOUTER</button>
                 </div>
             </div>
-            <button id="btn-toggle-cols" style="width:100%; background:#444; margin:10px 0;">FORMAT 3/1</button>
-            <button id="pop-save-btn" style="width:100%; background:var(--safe); height:65px; font-size:1.2rem">VALIDER</button>
+            <button id="btn-toggle-cols" style="width:100%; background:#444; margin:10px 0; color:white;">FORMAT 3/1</button>
+            <button id="pop-save-btn" style="width:100%; background:var(--safe); height:65px; font-size:1.2rem; color:white;">VALIDER</button>
         </div>
     </div>
 
@@ -73,9 +80,9 @@
         <div class="modal-content">
             <h3>Options</h3>
             <input type="text" id="opt-name-field" style="width:100%; padding:20px; font-size:1.2rem; border-radius:15px; border:1px solid #ccc; box-sizing:border-box;">
-            <button id="btn-rename" style="width:100%; margin-top:25px; background:var(--safe);">RENOMMER</button>
-            <button id="btn-delete" style="width:100%; margin-top:12px; background:var(--danger);">SUPPRIMER</button>
-            <button style="width:100%; margin-top:12px; background:#888;" onclick="closeModals()">ANNULER</button>
+            <button id="btn-rename" style="width:100%; margin-top:25px; background:var(--safe); color:white;">RENOMMER</button>
+            <button id="btn-delete" style="width:100%; margin-top:12px; background:var(--danger); color:white;">SUPPRIMER</button>
+            <button style="width:100%; margin-top:12px; background:#888; color:white;" onclick="closeModals()">ANNULER</button>
         </div>
     </div>
 
