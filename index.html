@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SecureNotes Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <button id="back-btn" class="hidden">RETOUR</button>
+        <h1 id="header-title">Catégories</h1>
+        <div id="header-actions">
+            <button id="extra-1" class="extra-btn hidden">1</button>
+            <button id="extra-2" class="extra-btn hidden">2</button>
+            <button id="extra-3" class="extra-btn hidden">3</button>
+            <button id="settings-btn">⚙️</button>
+            <button id="add-btn">+</button>
+        </div>
+    </header>
+
+    <main id="app"></main>
+
+    <div id="modal-settings" class="modal hidden">
+        <div class="modal-content">
+            <h3>Réglages</h3>
+            <div class="setting-item">Mode Sombre <input type="checkbox" id="dark-mode-toggle"></div>
+            <div class="setting-item">Taille Police <input type="range" id="font-slider" min="12" max="24" value="16"></div>
+            <hr>
+            <h4>Templates Masters</h4>
+            <div class="master-grid">
+                <button onclick="openMasterEdit(0)">Pop-up 1</button>
+                <button onclick="openMasterEdit(1)">Pop-up 2</button>
+                <button onclick="openMasterEdit(2)">Pop-up 3</button>
+                <button onclick="openMasterEdit(3)">Pop-up 4</button>
+                <button onclick="openMasterEdit(4)">Pop-up 5</button>
+            </div>
+            <hr>
+            <button id="export-btn">Exporter JSON</button>
+            <button id="import-btn" onclick="document.getElementById('file-input').click()">Importer JSON</button>
+            <input type="file" id="file-input" class="hidden" accept=".json">
+            <button id="reset-btn">RESET TOTAL</button>
+            <button class="btn-main" onclick="closeModals()">Fermer</button>
+        </div>
+    </div>
+
+    <div id="modal-text" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-text-title">Édition</h3>
+            <textarea id="modal-text-input" placeholder="Saisir votre texte ici..."></textarea>
+            <div id="master-logic-btns" class="hidden">
+                <button id="btn-overwrite" class="btn-warn">Écraser Globalement</button>
+                <button id="btn-append" class="btn-safe">Ajouter Globalement</button>
+            </div>
+            <button id="save-close-text" class="btn-main">Enregistrer & Fermer</button>
+        </div>
+    </div>
+
+    <canvas id="capture-canvas" style="display:none;"></canvas>
+    <script src="app.js"></script>
+</body>
+</html>

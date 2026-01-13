@@ -1,0 +1,67 @@
+:root {
+    --bg: #F4F7F9; --surface: #FFFFFF; --text-main: #2C3E50; --text-sub: #7F8C8D;
+    --accent: #4A90E2; --accent-light: #D6EAF8; --border: #D5DBDB;
+    --shadow: 0 4px 6px rgba(0,0,0,0.05); --header-h: 65px;
+    --danger: #D35400; --safe: #27AE60;
+}
+body.dark {
+    --bg: #1A1A1B; --surface: #2C2C2E; --text-main: #E5E5E7; --text-sub: #A1A1A3;
+    --accent: #5DADE2; --accent-light: #213345; --border: #3A3A3C;
+}
+body { margin: 0; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text-main); font-size: 16px; overflow-x: hidden; }
+
+/* Header & Navigation */
+header {
+    display: flex; align-items: center; padding: 0 10px; background: var(--surface);
+    height: var(--header-h); border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100;
+}
+header h1 { flex: 1; font-size: 1.1rem; text-align: center; color: var(--accent); font-weight: bold; margin: 0; }
+
+/* Modales */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.modal-content {
+    background: var(--surface); width: 95%; max-width: 600px; padding: 15px;
+    border-radius: 0; box-shadow: var(--shadow); position: relative; box-sizing: border-box;
+}
+#modal-text-input {
+width: 100%; min-height: 300px; margin: 10px 0; padding: 10px;
+border: 1px dashed var(--text-sub); background: var(--bg); color: inherit;
+font-size: 1.1rem; box-sizing: border-box; border-radius: 0;
+}
+
+/* Boutons Tactiles (Rectangulaires) */
+button {
+    min-height: 55px; border-radius: 0; border: none; background: var(--accent);
+    color: white; font-weight: bold; cursor: pointer; padding: 10px;
+    font-size: 0.9rem; transition: background 0.2s;
+}
+.extra-btn { min-width: 50px; height: 50px; margin: 0 2px; background: var(--surface); border: 1px solid var(--border); color: var(--text-sub); }
+.btn-active { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* Listes */
+.item-row {
+    background: var(--surface); padding: 22px; margin: 8px 0; border-radius: 0;
+    display: flex; align-items: center; border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.note-card { background: var(--surface); padding: 20px; margin: 8px 0; border-radius: 0; border-left: 8px solid var(--accent); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* Éditeur de Note (Écran 4) */
+#editor-container { padding: 10px; background: var(--surface); border: 1px solid var(--border); margin: 5px; }
+.field-label { font-size: 0.8rem; font-weight: bold; color: var(--accent); margin-bottom: 5px; }
+.shared-field {
+    width: 100%; min-height: 100px; background: var(--bg); border: 1px dashed var(--text-sub);
+    padding: 10px; color: inherit; box-sizing: border-box; margin-bottom: 20px; font-family: inherit;
+}
+.main-editor {
+    width: 100%; min-height: 400px; border: 1px dashed var(--text-sub); background: var(--bg);
+    color: inherit; font-size: 1.1rem; padding: 10px; box-sizing: border-box; resize: none;
+}
+
+/* Utilitaires */
+.hidden { display: none !important; }
+#reset-btn { background: var(--danger); width: 100%; margin-top: 10px; }
+.btn-main { background: var(--accent); width: 100%; margin-top: 10px; }
+.btn-safe { background: var(--safe); width: 100%; margin-bottom: 5px; }
+.btn-warn { background: var(--danger); width: 100%; margin-bottom: 5px; }
+.master-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.photo-thumb { width: 90px; height: 90px; object-fit: cover; border: 1px solid var(--border); margin: 5px; }
