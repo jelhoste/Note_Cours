@@ -1,9 +1,4 @@
-{
-    "name": "SecureNotes",
-    "short_name": "Notes",
-    "start_url": "index.html",
-    "display": "standalone",
-    "background_color": "#F4F7F9",
-    "theme_color": "#4A90E2",
-    "icons": [{"src": "https://via.placeholder.com/192", "sizes": "192x192", "type": "image/png"}]
-}
+const CACHE = 'secure-notes-v8';
+const ASSETS = ['index.html', 'style.css', 'app.js', 'manifest.json'];
+self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
+self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
