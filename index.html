@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SecureNotes Pro</title>
-    <link rel="manifest" href="manifest.json">
+    <title>SecurePro V23</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
 <body>
-    <header id="header">
-        <button id="back-btn" class="hidden">RETOUR</button>
-        <h1 id="header-title">Catégories</h1>
-        <div id="header-actions">
-            <button id="extra-1" class="extra-btn hidden">1</button>
-            <button id="extra-2" class="extra-btn hidden">2</button>
-            <button id="extra-3" class="extra-btn hidden">3</button>
+    <header>
+        <button id="back-btn" class="hidden">⬅</button>
+        <h1 id="header-title">CATÉGORIES</h1>
+        <div style="display:flex;">
+            <button id="p1-btn" class="pop-btn hidden">P1</button>
+            <button id="p2-btn" class="pop-btn hidden">P2</button>
             <button id="settings-btn">⚙️</button>
             <button id="add-btn">+</button>
         </div>
@@ -24,36 +23,59 @@
 
     <div id="modal-settings" class="modal hidden">
         <div class="modal-content">
-            <h3>Réglages</h3>
-            <div class="setting-item">Mode Sombre <input type="checkbox" id="dark-mode-toggle"></div>
-            <div class="setting-item">Taille Police <input type="range" id="font-slider" min="12" max="24" value="16"></div>
-            <hr>
-            <h4>Templates Masters</h4>
-            <div class="master-grid">
-                <button onclick="openMasterEdit(0)">Pop-up 1</button>
-                <button onclick="openMasterEdit(1)">Pop-up 2</button>
-                <button onclick="openMasterEdit(2)">Pop-up 3</button>
-                <button onclick="openMasterEdit(3)">Pop-up 4</button>
-                <button onclick="openMasterEdit(4)">Pop-up 5</button>
+            <h2 style="margin-top:0">Paramètres</h2>
+            <div id="dark-toggle-action" class="switch-container">
+                <span>MODE SOMBRE</span>
+                <div class="toggle-track"></div>
+            </div>
+            <div class="setting-row">
+                <span>Taille Police</span>
+                <input type="range" id="range-fs" min="14" max="30" style="width:50%">
             </div>
             <hr>
-            <button id="export-btn">Exporter JSON</button>
-            <button id="import-btn" onclick="document.getElementById('file-input').click()">Importer JSON</button>
-            <input type="file" id="file-input" class="hidden" accept=".json">
-            <button id="reset-btn">RESET TOTAL</button>
-            <button class="btn-main" onclick="closeModals()">Fermer</button>
+            <div style="font-weight:bold; color:var(--safe); margin-bottom:10px;">COULEURS MODE CLAIR</div>
+            <div class="setting-row"><span>Menu & Titre</span> <input type="color" id="c-light-m"></div>
+            <div class="setting-row"><span>Texte Éditeur</span> <input type="color" id="c-light-e"></div>
+            <hr>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
+                <button onclick="openMaster(0)">MASTER P1</button>
+                <button onclick="openMaster(1)">MASTER P2</button>
+            </div>
+            <button id="exp-btn" style="width:100%; margin-bottom:10px; background:#444;">EXPORTER BACKUP</button>
+            <button id="imp-btn" style="width:100%; margin-bottom:15px; background:#444;">IMPORTER BACKUP</button>
+            <input type="file" id="file-input" class="hidden">
+            <button style="width:100%; background:var(--danger); font-size:1.1rem" onclick="closeModals()">FERMER</button>
         </div>
     </div>
 
-    <div id="modal-text" class="modal hidden">
+    <div id="modal-pop" class="modal hidden">
         <div class="modal-content">
-            <h3 id="modal-text-title">Édition</h3>
-            <textarea id="modal-text-input" placeholder="Saisir votre texte ici..."></textarea>
-            <div id="master-logic-btns" class="hidden">
-                <button id="btn-overwrite" class="btn-warn">Écraser Globalement</button>
-                <button id="btn-append" class="btn-safe">Ajouter Globalement</button>
+            <h3 id="pop-title" style="margin-top:0">Pop-up</h3>
+            <div id="pop-simple-area"><textarea id="pop-input" style="min-height:280px;"></textarea></div>
+            <div id="pop-col-area" class="hidden">
+                <div style="display:flex; gap:10px;">
+                    <textarea id="pop-col-left" style="flex:3; height:220px;"></textarea>
+                    <textarea id="pop-col-right" style="flex:1; height:220px;"></textarea>
+                </div>
             </div>
-            <button id="save-close-text" class="btn-main">Enregistrer & Fermer</button>
+            <div id="pop-master-ctrls" class="hidden">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0;">
+                    <button id="btn-overwrite" style="background:var(--danger)">ÉCRASER</button>
+                    <button id="btn-append" style="background:var(--safe)">AJOUTER</button>
+                </div>
+            </div>
+            <button id="btn-toggle-cols" style="width:100%; background:#444; margin:10px 0;">FORMAT 3/1</button>
+            <button id="pop-save-btn" style="width:100%; background:var(--safe); height:65px; font-size:1.2rem">VALIDER</button>
+        </div>
+    </div>
+
+    <div id="modal-opt" class="modal hidden">
+        <div class="modal-content">
+            <h3>Options</h3>
+            <input type="text" id="opt-name-field" style="width:100%; padding:20px; font-size:1.2rem; border-radius:15px; border:1px solid #ccc; box-sizing:border-box;">
+            <button id="btn-rename" style="width:100%; margin-top:25px; background:var(--safe);">RENOMMER</button>
+            <button id="btn-delete" style="width:100%; margin-top:12px; background:var(--danger);">SUPPRIMER</button>
+            <button style="width:100%; margin-top:12px; background:#888;" onclick="closeModals()">ANNULER</button>
         </div>
     </div>
 
